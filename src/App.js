@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import axios from "axios";
+
+import { Search } from "./Search";
+import { Header } from "./Header";
+import { Result } from "./Result";
+
+import { getTodaysDate } from "./utils";
 
 function App() {
+  const [pincode, setPincode] = useState(0);
+  const [vaccineResult, setVaccineResult] = useState(null);
+
+  const pinCodeHandler = (pincode) => {
+    setPincode(pincode);
+  };
+
+  const searchHandler = () => {
+    axios
+      .get(
+        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pincode}&date=${getTodaysDate()}`
+      )
+      .then((response) => {
+        console.log("response", response.data);
+        setVaccineResult(response.data);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Search pinCodeHandler={pinCodeHandler} searchHandler={searchHandler} />
+      {vaccineResult && <Result data={vaccineResult} />}
+    </>
   );
 }
 
