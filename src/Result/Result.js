@@ -6,16 +6,21 @@ export function Result(props) {
       <Table>
         <tr>
           <th>Center</th>
-          <th>Address</th>
-          <th>Fee Type</th>
+          <th>Date</th>
+          <th>Vaccine</th>
+          <th>Vaccine availability</th>
         </tr>
-        {props?.data?.centers.map((data) => (
-          <tr>
-            <td>{data.name}</td>
-            <td>{data.address}</td>
-            <td>{data.fee_type}</td>
-          </tr>
-        ))}
+
+        {props?.data?.centers.map((center) =>
+          center?.sessions.map((session) => (
+            <tr>
+              <TableData>{center.name}</TableData>
+              <TableData>{session.date}</TableData>
+              <TableData>{session.vaccine}</TableData>
+              <TableData>{session.available_capacity}</TableData>
+            </tr>
+          ))
+        )}
       </Table>
     </ResultContainer>
   );
@@ -29,4 +34,8 @@ const ResultContainer = styled.div`
 
 const Table = styled.table`
   table-layout: fixed;
+`;
+
+const TableData = styled.td`
+  text-align: center;
 `;
