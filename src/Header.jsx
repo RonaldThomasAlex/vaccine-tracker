@@ -13,11 +13,17 @@ export function Header() {
       <div
         style={{
           color: "white",
-          padding: "20px 0",
-          fontSize: "20px",
+          padding: "25px 0",
+          fontSize: "30px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
         }}
       >
-        Vaccine Finder
+        <div>Vaccine Finder</div>
+        <div style={{ color: "grey", fontSize: "12px", fontStyle: "italic" }}>
+          INDIA
+        </div>
       </div>
       <img
         src={logo}

@@ -21,7 +21,7 @@ export function Search(props) {
     >
       <TextField
         error={error}
-        label="pincode"
+        label="Pincode"
         id="outlined-size-small"
         size="small"
         onChange={(event) => pinCodeHandler(event.target.value)}

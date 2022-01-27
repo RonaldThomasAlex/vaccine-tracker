@@ -46,10 +46,10 @@ export function Result(props) {
               Date
             </StyledTableCell>
             <StyledTableCell align="center" width="115px">
-              Vaccine
+              Name
             </StyledTableCell>
             <StyledTableCell align="center" width="115px">
-              Vaccine availability
+              Availability
             </StyledTableCell>
           </TableRow>
         </TableHead>
