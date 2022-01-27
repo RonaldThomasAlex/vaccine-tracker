@@ -1,19 +1,40 @@
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useState } from "react";
+
 export function Search(props) {
+  console.log(props.pincode);
+  const [error, setError] = useState(false);
+
+  function pinCodeHandler(value) {
+    if (value.length > 6) {
+      setError(true);
+    } else {
+      setError(false);
+      props.pinCodeHandler(value);
+    }
+  }
+
   return (
     <div
       style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
     >
-      <input
-        type="text"
-        placeholder="enter pincode"
-        onChange={(event) => props.pinCodeHandler(event.target.value)}
+      <TextField
+        error={error}
+        label="pincode"
+        id="outlined-size-small"
+        size="small"
+        onChange={(event) => pinCodeHandler(event.target.value)}
+        helperText={error && "enter 6 digit pincode"}
       />
-      <button
-        style={{ marginLeft: "10px" }}
+      <Button
+        disabled={error || props.pincode.toString().length < 6}
+        variant="contained"
+        style={{ marginLeft: "10px", height: "40px" }}
         onClick={() => props.searchHandler()}
       >
         Search
-      </button>
+      </Button>
     </div>
   );
 }

@@ -32,7 +32,11 @@ function App() {
   return (
     <>
       <Header />
-      <Search pinCodeHandler={pinCodeHandler} searchHandler={searchHandler} />
+      <Search
+        pinCodeHandler={pinCodeHandler}
+        searchHandler={searchHandler}
+        pincode={pincode}
+      />
       {vaccineResult && <Result data={vaccineResult} />}
     </>
   );
